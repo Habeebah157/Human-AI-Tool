@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text Annotation Tool</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> -->
     <style>
         .highlighted {
             position: relative;
@@ -51,6 +51,7 @@
     <div class="container">
         <h1>Text Annotation Tool</h1>
         <div id="annotation-container">
+            <h1>{{files}}</h1>
             <div id="sentence-input" contenteditable="true" placeholder="Loading..."></div>
             <div class="annotation-controls">
                 <select id="suicide-class">
@@ -81,52 +82,52 @@
         let startTime = Date.now();
         let highlightedElements = [];
         let actions = [];
-        async function hello() {
-            const response = await fetch('http://127.0.0.1:5000/hello')
-            console.log("my response",response)
-        }
+        // async function hello() {
+        //     const response = await fetch('http://127.0.0.1:5000/hello')
+        //     console.log(response)
+        // }
 
-        async function loadFiles() {
-            try {
-                console.log("HELLO")
-                const response = await fetch('http://127.0.0.1:5000/files');
-                console.log("Hello2 ", response.json())
-                const data = await response;
-                console.log("response", response.type)
+        // async function loadFiles() {
+        //     try {
+        //         console.log("HELLO")
+        //         const response = await fetch('http://127.0.0.1:5000/files');
+        //         console.log("Hello2 ", response.json())
+        //         const data = await response;
+        //         console.log("response", response.type)
 
-                files = data.files;
-                console.log(files)
+        //         files = data.files;
+        //         console.log(files)
 
-                if (files === undefined){
-                    document.getElementById('sentence-input').innerHTML = "HELLO";
-                }
-                // if (files.length > 0) {
-                //     loadFileContent(0);  // Load the first file automatically
-                // } else{
-                //     document.getElementById('sentence-input').innerHTML = "No files available.";
-                // } 
-            } catch (error) {
-                console.error('Error loading files:', error);
-                document.getElementById('sentence-input').innerHTML = "Failed to load files.";
-            }
-        }
+        //         if (files === undefined){
+        //             document.getElementById('sentence-input').innerHTML = "HELLO";
+        //         }
+        //         // if (files.length > 0) {
+        //         //     loadFileContent(0);  // Load the first file automatically
+        //         // } else{
+        //         //     document.getElementById('sentence-input').innerHTML = "No files available.";
+        //         // } 
+        //     } catch (error) {
+        //         console.error('Error loading files:', error);
+        //         document.getElementById('sentence-input').innerHTML = "Failed to load files.";
+        //     }
+        // }
 
-        async function loadFileContent(index) {
-            try {
-                const filename = files[index];
-                const response = await fetch(`http://127.0.0.1:8000/file/${filename}`);
-                const data = await response.json();
-                document.getElementById('sentence-input').innerHTML = data.content;
-                document.getElementById('suicide-class').value = "";
-                document.getElementById('comment-input').value = "";
-                document.getElementById('highlighted-text-display').textContent = "No highlighted text";
-                highlightedElements = [];
-                logAction('Loaded file', { filename });
-            } catch (error) {
-                console.error('Error loading file content:', error);
-                document.getElementById('sentence-input').innerHTML = "Failed to load file content.";
-            }
-        }
+        // async function loadFileContent(index) {
+        //     try {
+        //         const filename = files[index];
+        //         const response = await fetch(`http://127.0.0.1:8000/file/${filename}`);
+        //         const data = await response.json();
+        //         document.getElementById('sentence-input').innerHTML = data.content;
+        //         document.getElementById('suicide-class').value = "";
+        //         document.getElementById('comment-input').value = "";
+        //         document.getElementById('highlighted-text-display').textContent = "No highlighted text";
+        //         highlightedElements = [];
+        //         logAction('Loaded file', { filename });
+        //     } catch (error) {
+        //         console.error('Error loading file content:', error);
+        //         document.getElementById('sentence-input').innerHTML = "Failed to load file content.";
+        //     }
+        // }
 
         function highlightSelection() {
             const selection = window.getSelection();
@@ -267,8 +268,8 @@
         }
 
         window.onload = function() {
-            hello();
-            loadFiles();  // Fetch files and load the first one automatically
+            // hello();
+            // loadFiles();  // Fetch files and load the first one automatically
         };
     </script>
 </body>
